@@ -4,18 +4,13 @@ import Link from "../link/Link";
 import { Button, buttonVariants } from "../ui/button";
 import { useState } from "react";
 import { Menu, XIcon } from "lucide-react";
-import { useParams } from "next/navigation";
-import { i18n } from "@/i18n.config"; // استيراد i18n
+// import { useParams } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = ({ translations }: { translations: { [key: string]: string } }) => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { locale } = useParams();
+  // const { locale } = useParams();
 
-  // التأكد إن الـ locale دايمًا قيمة صحيحة
-  const currentLocale = typeof locale === "string" && i18n.locales.includes(locale)
-    ? locale
-    : i18n.defaultLocale;
 
   const links = [
     { id: crypto.randomUUID(), title: translations.menu, href: Routes.MENU },
@@ -51,7 +46,6 @@ const Navbar = ({ translations }: { translations: { [key: string]: string } }) =
           <li key={link.id}>
             <Link
               href={`${link.href}`} // بنستخدم href بدون الـ locale يدويًا
-              locale={currentLocale} // بنمرر الـ locale صراحة
               className={`${
                 link.href === `${Routes.AUTH}/${Pages.LOGIN}`
                   ? `${buttonVariants({ size: "lg" })} !px-8 !py-3 !rounded-full`
